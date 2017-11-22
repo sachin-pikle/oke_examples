@@ -23,7 +23,7 @@ push-release:
     - script:
         name: move binary
         code: mv ./hello-world /hello-world
-  steps:
+  
     - internal/docker-push:
         tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
         working-dir: /pipeline/source
