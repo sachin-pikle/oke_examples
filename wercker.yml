@@ -10,6 +10,10 @@ build:
         name: Build application
         code: go build
 
+    - script:
+        name: move binary
+        code: mv ./hello-world $WERCKER_OUTPUT_DIR/hello-world
+
 push-release:
   steps:
     - internal/docker-push:
