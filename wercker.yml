@@ -22,15 +22,13 @@ push-release:
   steps:
     - script:
         name: move binary
-        code: |
-          mkdir /app
-          mv ./hello-world /app/hello-world
+        code: mv ./hello-world /hello-world
   steps:
     - internal/docker-push:
         tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
         working-dir: /pipeline/source
         ports: "8080"
-        cmd: /app/hello-world
+        cmd: /hello-world
         
 #delete any existing Wercker secret before creating, to accommodate secret changes
 inject-secret:
