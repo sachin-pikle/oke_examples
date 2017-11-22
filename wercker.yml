@@ -14,6 +14,10 @@ build:
         name: move binary
         code: mv ./hello-world $WERCKER_OUTPUT_DIR/hello-world
 
+    - script:
+        name: copy kubernetes.yml.template
+        code: cp kubernetes.yml.template "$WERCKER_OUTPUT_DIR/kubernetes.yml.template"
+
 push-release:
   box:
     id: alpine
