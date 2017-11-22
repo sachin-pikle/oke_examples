@@ -15,12 +15,22 @@ build:
         code: mv ./hello-world $WERCKER_OUTPUT_DIR/hello-world
 
 push-release:
+  box:
+    id: alpine
+    cmd: /bin/sh
+    
+  steps:
+    - script:
+        name: move binary
+        code: |
+          mkdir /app
+          mv ./hello-world /app/hello-world
   steps:
     - internal/docker-push:
         tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
         working-dir: /pipeline/source
         ports: "8080"
-        cmd: ./hello-world
+        cmd: /app/hello-world
         
 #delete any existing Wercker secret before creating, to accommodate secret changes
 inject-secret:
