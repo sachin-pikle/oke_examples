@@ -28,12 +28,6 @@ push-release:
         name: move binary
         code: mv ./hello-world /hello-world
   
-#    - internal/docker-push:
-#        tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
-#        working-dir: /pipeline/source
-#        ports: "8080"
-#        cmd: /hello-world
-
     - internal/docker-push:
         username: $CONTAINER_REGISTRY_USERNAME
         password: $CONTAINER_REGISTRY_PASSWORD
@@ -63,7 +57,7 @@ inject-secret:
         server: $KUBERNETES_MASTER
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
-        command: create secret docker-registry ocir-secret --docker-server=$CONTAINER_REGISTRY --docker-username=$CONTAINER_REGISTRY_USERNAME --docker-password='$CONTAINER_REGISTRY_PASSWORD' --docker-email=$DOCKER_EMAIL; echo create registry secret
+        command: create secret docker-registry ocir-secret --docker-server='$CONTAINER_REGISTRY' --docker-username='$CONTAINER_REGISTRY_USERNAME' --docker-password='$CONTAINER_REGISTRY_PASSWORD' --docker-email='$DOCKER_EMAIL'
 
 deploy-to-cluster:
     box:
@@ -80,7 +74,6 @@ deploy-to-cluster:
     - kubectl:
         name: deploy to kubernetes
         server: $KUBERNETES_MASTER
-        #username: $KUBERNETES_USERNAME
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
         command: apply -f kubernetes.yml
