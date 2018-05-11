@@ -17,14 +17,14 @@ spec:
     spec:
       containers:
       - name: hello-world
-        image: ${DOCKER_REPO}:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
+        image: ${CONTAINER_REPO}:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
         imagePullPolicy: Always
         ports:
         - name: hello-world
           containerPort: 8080
           protocol: TCP
       imagePullSecrets:
-        - name: wercker          
+        - name: ocir-secret          
 ---
 apiVersion: v1
 kind: Service
