@@ -50,14 +50,14 @@ inject-secret:
         server: $KUBERNETES_MASTER
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
-        command: delete secret ocir-secret; echo delete registry secret
+        command: delete secret ocirsecret; echo delete registry secret
         
     - kubectl:
         name: create secret
         server: $KUBERNETES_MASTER
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
-        command: create secret docker-registry ocir-secret --docker-server='$CONTAINER_REGISTRY' --docker-username='$CONTAINER_REGISTRY_USERNAME' --docker-password='$CONTAINER_REGISTRY_PASSWORD' --docker-email='$DOCKER_EMAIL'
+        command: create secret docker-registry ocirsecret --docker-server='$CONTAINER_REGISTRY' --docker-username='$CONTAINER_REGISTRY_USERNAME' --docker-password='$CONTAINER_REGISTRY_PASSWORD' --docker-email='$DOCKER_EMAIL'
 
 deploy-to-cluster:
     box:
