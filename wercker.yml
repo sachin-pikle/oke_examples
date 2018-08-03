@@ -29,10 +29,10 @@ push-release:
         code: mv ./hello-world /hello-world
   
     - internal/docker-push:
-        username: $CONTAINER_REGISTRY_USERNAME
-        password: $CONTAINER_REGISTRY_PASSWORD
-        repository: $CONTAINER_REPO
-        registry: $CONTAINER_REGISTRY
+        username: $OCIR_USERNAME
+        password: $OCIR_PASSWORD
+        repository: $OCIR_REPO
+        registry: $OCIR
         tag: $WERCKER_GIT_BRANCH-$WERCKER_GIT_COMMIT
         working-dir: /pipeline/source
         ports: "8080"
